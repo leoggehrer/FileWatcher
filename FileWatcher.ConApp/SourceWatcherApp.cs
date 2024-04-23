@@ -7,7 +7,7 @@ namespace FileWatcher.ConApp
     /// <summary>
     /// Represents the SourceWatcherApp class.
     /// </summary>
-    internal partial class SourceWatcherApp : CommonTool.ConsoleApplication
+    public partial class SourceWatcherApp : CommonTool.ConsoleApplication
     {
         #region Class-Constructors
         /// <summary>

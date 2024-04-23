@@ -7,7 +7,7 @@ namespace FileWatcher.ConApp
     /// <summary>
     /// Represents the UMLWatcherApp class.
     /// </summary>
-    internal partial class UMLWatcherApp : CommonTool.ConsoleApplication
+    public partial class UMLWatcherApp : CommonTool.ConsoleApplication
     {
         #region Class-Constructors
         /// <summary>
