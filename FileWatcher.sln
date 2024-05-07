@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWatcher.ConApp", "FileWatcher.ConApp\FileWatcher.ConApp.csproj", "{CC0FA6E6-071A-4C3B-860D-8B0973F52C59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileWatcher.ConApp", "FileWatcher.ConApp\FileWatcher.ConApp.csproj", "{CC0FA6E6-071A-4C3B-860D-8B0973F52C59}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonTool", "..\CommonTool\CommonTool\CommonTool.csproj", "{E6923E74-5D6B-447B-87B3-0BC1FA1DCBF2}"
 EndProject
@@ -15,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC0FA6E6-071A-4C3B-860D-8B0973F52C59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC0FA6E6-071A-4C3B-860D-8B0973F52C59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC0FA6E6-071A-4C3B-860D-8B0973F52C59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC0FA6E6-071A-4C3B-860D-8B0973F52C59}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E6923E74-5D6B-447B-87B3-0BC1FA1DCBF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E6923E74-5D6B-447B-87B3-0BC1FA1DCBF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6923E74-5D6B-447B-87B3-0BC1FA1DCBF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
