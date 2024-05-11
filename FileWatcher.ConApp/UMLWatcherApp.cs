@@ -234,12 +234,12 @@ namespace FileWatcher.ConApp
         /// </summary>
         /// <param name="menuItem">The menu item containing the necessary parameters.</param>
         /// <param name="force">A boolean value indicating whether to force the creation of the watcher.</param>
-        private static void CreateWatcher(MenuItem menuItem, bool force)
+        private void CreateWatcher(MenuItem menuItem, bool force)
         {
             var sourcePath = menuItem.Params["sourcePath"]?.ToString() ?? string.Empty;
             var targetPath = menuItem.Params["targetPath"]?.ToString() ?? string.Empty;
 
-            Watchers.Add(new UMLWatcher(sourcePath, targetPath, DiagramFolder, DiagramBuilder, "*.cs", false, force));
+            Watchers.Add(new UMLWatcher(sourcePath, MaxSubPathDepth, targetPath, DiagramFolder, DiagramBuilder, "*.cs", false, force));
         }
         /// <summary>
         /// Deletes a watcher from the list of watchers.

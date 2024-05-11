@@ -39,6 +39,10 @@ namespace FileWatcher.ConApp
         /// Gets the target path.
         /// </summary>
         public string TargetPath { get; private set; }
+        /// <summary>
+        /// Gets the maximum depth for the UML diagram.
+        /// </summary>
+        public int MaxSubPathDeep { get; private set; } = 3;
 
         /// <summary>
         /// Gets or sets the folder path for diagrams.
@@ -66,18 +70,20 @@ namespace FileWatcher.ConApp
         /// Initializes a new instance of the <see cref="UMLWatcher"/> class with the specified parameters.
         /// </summary>
         /// <param name="sourcePath">The path of the folder to watch.</param>
+        /// <param name="maxSubPathDeep">The max source path deep.</param>
         /// <param name="targetPath">The target path.</param>
         /// <param name="diagramFolder">The folder where the diagrams will be saved.</param>
         /// <param name="diagramBuilderType">The type of diagram builder to use.</param>
         /// <param name="filter">The filter for the files to watch.</param>
         /// <param name="createCompleteDiagram">A flag indicating whether to create a complete diagram.</param>
         /// <param name="force">A flag indicating whether to force the creation of diagrams.</param>
-        public UMLWatcher(string sourcePath, string targetPath, string diagramFolder, DiagramBuilderType diagramBuilderType, string filter, bool createCompleteDiagram, bool force)
+        public UMLWatcher(string sourcePath, int maxSubPathDeep, string targetPath, string diagramFolder, DiagramBuilderType diagramBuilderType, string filter, bool createCompleteDiagram, bool force)
             : base(sourcePath, filter)
         {
             Constructing();
 
             TargetPath = targetPath;
+            MaxSubPathDeep = maxSubPathDeep;
             DiagramFolder = diagramFolder;
             DiagramBuilder = diagramBuilderType;
             CreateCompleteDiagram = createCompleteDiagram;
@@ -168,19 +174,19 @@ namespace FileWatcher.ConApp
 
                 if ((DiagramBuilder & DiagramBuilderType.Activity) > 0)
                 {
-                    var builder = new ActivityDiagramBuilder(path, TargetPath, DiagramFolder, CreateCompleteDiagram, Force);
+                    var builder = new ActivityDiagramBuilder(path, MaxSubPathDeep, TargetPath, DiagramFolder, CreateCompleteDiagram, Force);
 
                     builder.CreateFromPath();
                 }
                 if ((DiagramBuilder & DiagramBuilderType.Class) > 0)
                 {
-                    var builder = new ClassDiagramBuilder(path, TargetPath, DiagramFolder, CreateCompleteDiagram, Force);
+                    var builder = new ClassDiagramBuilder(path, MaxSubPathDeep, TargetPath, DiagramFolder, CreateCompleteDiagram, Force);
 
                     builder.CreateFromPath();
                 }
                 if ((DiagramBuilder & DiagramBuilderType.Sequence) > 0)
                 {
-                    var builder = new SequenceDiagramBuilder(path, TargetPath, DiagramFolder, Force);
+                    var builder = new SequenceDiagramBuilder(path, MaxSubPathDeep, TargetPath, DiagramFolder, Force);
 
                     builder.CreateFromPath();
                 }
