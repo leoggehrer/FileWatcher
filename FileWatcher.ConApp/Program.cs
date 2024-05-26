@@ -5,7 +5,7 @@ namespace FileWatcher.ConApp
     /// <summary>
     /// Represents the main program class.
     /// </summary>
-    partial class Program
+    public partial class Program
     {
         #region Class-Constructors
         static Program()
@@ -21,7 +21,7 @@ namespace FileWatcher.ConApp
         /// The entry point of the application.
         /// </summary>
         /// <param name="args">The command-line arguments.</param>
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             new FileWatcherApp().Run(args);
         }
