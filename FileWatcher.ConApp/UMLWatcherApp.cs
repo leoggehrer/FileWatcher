@@ -37,6 +37,7 @@ namespace FileWatcher.ConApp
         public UMLWatcherApp()
         {
             Constructing();
+            MaxSubPathDepth = 1;
             Constructed();
         }
         /// <summary>
@@ -86,14 +87,26 @@ namespace FileWatcher.ConApp
                 new()
                 {
                     Key = $"{++mnuIdx}",
-                    Text = ToLabelText("Force", "Change force flag"),
+                    Text = ToLabelText($"{Force}", "Change force flag"),
                     Action = (self) => ChangeForce(),
                 },
                 new()
                 {
                     Key = $"{++mnuIdx}",
-                    Text = ToLabelText("Depth", "Change max sub path depth"),
+                    Text = ToLabelText($"{MaxSubPathDepth}", "Change max sub path depth"),
                     Action = (self) => ChangeMaxSubPathDepth(),
+                },
+                new()
+                {
+                    Key = $"{++mnuIdx}",
+                    Text = ToLabelText($"{PageIndex}", "Change the page index"),
+                    Action = (self) => ChangePageIndex(),
+                },
+                new()
+                {
+                    Key = $"{++mnuIdx}",
+                    Text = ToLabelText($"{PageSize}", "Change the page size"),
+                    Action = (self) => ChangePageSize(),
                 },
                 new()
                 {
@@ -118,10 +131,10 @@ namespace FileWatcher.ConApp
                 {
                     Key = $"{++mnuIdx}",
                     Text = ToLabelText("Target path", "Change target path"),
-                    Action = (self) => 
+                    Action = (self) =>
                     {
                         var savePath = TargetPath;
-                        
+
                         TargetPath = SelectOrChangeToSubPath(TargetPath, MaxSubPathDepth, [ SourcePath ]);
                         if (savePath != TargetPath)
                         {
@@ -132,13 +145,13 @@ namespace FileWatcher.ConApp
                 new()
                 {
                     Key = $"{++mnuIdx}",
-                    Text = ToLabelText("Folder", "Change diagram folder"),
+                    Text = ToLabelText("Diagram folder", "Change diagram folder"),
                     Action = (self) => ChangeDiagramFolder(),
                 },
                 new()
                 {
                     Key = $"{++mnuIdx}",
-                    Text = ToLabelText("Builder", "Change diagram builder"),
+                    Text = ToLabelText("Diagram builder", "Change diagram builder"),
                     Action = (self) => ChangeDiagramBuilder(),
                 },
                 CreateMenuSeparator(),
@@ -180,34 +193,48 @@ namespace FileWatcher.ConApp
 
             return [.. menuItems.Union(CreateExitMenuItems())];
         }
-
         /// <summary>
         /// Prints the header for the PlantUML application.
         /// </summary>
         /// <param name="sourcePath">The path of the solution.</param>
         protected override void PrintHeader()
         {
-            var count = 0;
-            var saveForeColor = ForegroundColor;
-
-            ForegroundColor = ConsoleColor.Green;
-
-            count = PrintLine(nameof(UMLWatcherApp));
-            PrintLine('=', count);
-            PrintLine();
-            ForegroundColor = saveForeColor;
-            PrintLine($"Force flag:       {Force}");
-            PrintLine($"Max. path depth:  {MaxSubPathDepth}");
-            PrintLine($"Projects path:    {ProjectsPath}");
-            PrintLine();
-            PrintLine($"Target path:      {TargetPath}");
-            PrintLine($"Diagram folder:   {DiagramFolder}");
-            PrintLine($"Diagram builder:  {DiagramBuilder} [{DiagramBuilderType.Activity}|{DiagramBuilderType.Class}|{DiagramBuilderType.Sequence}]");
-            PrintLine();
+            base.PrintHeader(nameof(UMLWatcherApp),
+                [
+                    new("Projects path:", ProjectsPath),
+                    new("Target path:", TargetPath),
+                    new("Diagram folder:", DiagramFolder),
+                    new("Diagram builder:", $"{DiagramBuilder} [{ DiagramBuilderType.Activity}|{ DiagramBuilderType.Class}|{ DiagramBuilderType.Sequence}]")
+                ]);
         }
         #endregion overrides
 
         #region app methods
+        /// <summary>
+        /// Changes the page index.
+        /// </summary>
+        public void ChangePageIndex()
+        {
+            PrintLine();
+            Print("Enter page index >= 0: ");
+            if (int.TryParse(ReadLine(), out var result) && result >= 0)
+            {
+                PageIndex = result;
+            }
+        }
+        /// <summary>
+        /// Changes the page size.
+        /// </summary>
+        public void ChangePageSize()
+        {
+            PrintLine();
+            Print("Enter page size > 0: ");
+            if (int.TryParse(ReadLine(), out var result) && result > 0)
+            {
+                PageIndex = 0;
+                PageSize = result;
+            }
+        }
         /// <summary>
         /// Changes the diagram folder name.
         /// </summary>

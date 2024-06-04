@@ -82,15 +82,7 @@ namespace FileWatcher.ConApp
         /// <param name="sourcePath">The path of the solution.</param>
         protected override void PrintHeader()
         {
-            var count = 0;
-            var saveForeColor = ForegroundColor;
-
-            ForegroundColor = ConsoleColor.Green;
-
-            count = PrintLine(nameof(FileWatcherApp));
-            PrintLine('=', count);
-            PrintLine();
-            ForegroundColor = saveForeColor;
+            base.PrintHeader(nameof(FileWatcherApp));
         }
         #endregion overrides
 

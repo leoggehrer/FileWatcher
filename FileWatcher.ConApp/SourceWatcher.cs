@@ -127,7 +127,7 @@ namespace FileWatcher.ConApp
             {
                 if (Environment.OSVersion.Platform == PlatformID.Win32NT)
                 {
-                    while (IsFileInUse(filePath) == false)
+                    while (IsFileInUse(filePath))
                     {
                         Thread.Sleep(500);
                     }
@@ -135,8 +135,9 @@ namespace FileWatcher.ConApp
 
                 var fileName = Path.GetFileName(filePath);
                 var targetFilePath = Path.Combine(TargetPath, fileName);
+                var fileEquals = filePath.Equals(targetFilePath, StringComparison.OrdinalIgnoreCase);
 
-                if (Force || File.Exists(targetFilePath) == false)
+                if (fileEquals == false && (Force || File.Exists(targetFilePath) == false))
                 {
                     var targetPath = Path.GetDirectoryName(targetFilePath);
 
